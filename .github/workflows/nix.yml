@@ -9,6 +9,9 @@ on:
 jobs:
   dev:
     runs-on: ubuntu-22.04
+    permissions:
+      id-token: write
+      contents: read
     defaults:
       run:
         shell: nix develop --command {0}
