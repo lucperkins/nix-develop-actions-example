@@ -1,0 +1,23 @@
+name: Nix develop shell
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  dev:
+    runs-on: ubuntu-22.04
+    defaults:
+      run:
+        shell: nix develop --command {0}
+    steps:
+      - name: git checkout
+        uses: actions/checkout@v4
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+      - name: Enable Magic Nix Cache
+        uses: DeterminateSystems/magic-nix-cache-action@main
+      - run: |
+          ponysay "Hello from the Nix dev shell"
